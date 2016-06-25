@@ -12,7 +12,7 @@ cmdCurl="$2"
 ## Utis
 
 tmp="${dest}.tmp"
-dest="${$dest}.mp4"
+dest="${dest}.mp4"
 
 e() {
   echo "# $@"
