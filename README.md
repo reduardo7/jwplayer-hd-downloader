@@ -9,7 +9,7 @@ Download videos using **JW Player** in **HD**!
 3. Go to **Network** tab in **console**.
 4. Wait for next part of video.
 5. Right click an select **Copy as cURL (bash)**.
-6. Run `downloader.sh "my-file-name" "PASTE CURL HERE"`.
+6. Run `bash downloader.sh "my-file-name" "PASTE CURL HERE"`.
 
 ## Example
 
