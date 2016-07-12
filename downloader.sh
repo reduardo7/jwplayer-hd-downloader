@@ -11,7 +11,7 @@ cmdCurl="$2"
 ##################
 ## Utis
 
-tmp="${dest}.tmp"
+tmpFile="${dest}.tmp"
 dest="${dest}.mp4"
 
 e() {
@@ -20,7 +20,7 @@ e() {
 
 finish() {
   e "#######################################"
-  rm -f "${tmp}"
+  rm -f "${tmpFile}"
   e "File: $dest"
   e "Finish!"
   exit 0
@@ -43,15 +43,29 @@ for i in `seq 1 9999`; do
   cmdCurlTmp="`echo "$cmdCurl" | sed "s/\/segment[0-9]*_/\/segment${i}_/"`"
   #if ! $cmdCurlTmp >> "${dest}"
   e "$cmdCurlTmp"
-  bash -c "$cmdCurlTmp" > "${tmp}"
-  if grep -i '<HTML>' "${tmp}" >/dev/null 2>/dev/null
+
+  tmp=""
+  while [ -z "$tmp" ]; do
+    if bash -c "$cmdCurlTmp" > "${tmpFile}"
+	  then
+        tmp="`cat ${tmpFile}`"
+	  else
+	    tmp=""
+	  fi
+	if [ -z "$tmp" ]; then
+      e "Connection problem, retry in 10 seconds..."
+      sleep 10
+	fi
+  done
+
+  if grep -i '<HTML>' "${tmpFile}" >/dev/null 2>/dev/null
     then
       # HTML
       e "Empty part!" 1>&2
       finish
     else
       # Append
-      cat "${tmp}" >> "${dest}"
+      cat "${tmpFile}" >> "${dest}"
     fi
 done
 
