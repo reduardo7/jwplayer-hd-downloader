@@ -4,11 +4,11 @@ Download videos using **JW Player** in **HD**!
 
 # Usage
 
-1. Play video using **Chrome Browser**.
-2. Open **console**.
+1. Play video using **Chrome Browser** and set the video quality.
+2. Open **console** (`F12` key).
 3. Go to **Network** tab in **console**.
 4. Wait for next part of video.
-5. Right click an select **Copy as cURL (bash)**.
+5. Right click and select **Copy as cURL (bash)**.
 6. Run `bash downloader.sh "my-file-name" "PASTE CURL HERE"`.
 
 ## Example
